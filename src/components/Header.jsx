@@ -254,13 +254,52 @@
 
 
 
-
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FiGithub, FiLinkedin, FiMenu, FiX } from "react-icons/fi";
+// import { EmailJSResponseStatus } from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 
 const Header = () => {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+   
+     // ✅ Email sending logic (fixed)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const serviceId = "service_17c1gin";
+    const templateId = "template_mp5dnaf";
+    const publicKey = "UFywwNYxX8Qv7K0e9";
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_name: "Rishita Raj",
+      message: message,
+    };
+
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        console.log("Email sent successfully!", response);
+        alert("✅ Message sent successfully!");
+        setName("");
+        setEmail("");
+        setMessage("");
+      })
+      .catch((error) => {
+        console.error("❌ Error sending email:", error);
+        alert("Failed to send message. Please try again.");
+      });
+  };
+     
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
   const [contactFormOpen, setContactFormOpen] = useState(false);
@@ -304,7 +343,7 @@ const Header = () => {
     <>
       {/* ✅ HEADER */}
       <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-md transition-all duration-300">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-12 md:h-20">
           {/* Logo Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -490,12 +529,14 @@ const Header = () => {
                 </button>
               </div>
 
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4 emailForm">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
                   <input
                     type="text"
                     placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white"
                   />
                 </div>
@@ -505,6 +546,8 @@ const Header = () => {
                   <input
                     type="email"
                     placeholder="Your Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white"
                   />
                 </div>
@@ -514,6 +557,8 @@ const Header = () => {
                   <textarea
                     rows="4"
                     placeholder="How can I help you?"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white"
                   />
                 </div>
