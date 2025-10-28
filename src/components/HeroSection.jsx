@@ -6,7 +6,7 @@ const HeroSection = () => {
     <section className='h-screen flex xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden'>
 
     {/* left elemenet */}
-        <div className="z-40 xl:mb-0 mb-[20%]">
+        <div className="z-40 xl:mb-0 mb-[-28%]">
             <motion.h1 
             initial={{opacity: 0, y: 80}}
             animate={{opacity: 1, y: 0}}
@@ -36,7 +36,7 @@ const HeroSection = () => {
 
 
         {/* right section */}
-        <Spline className="absolute xl:right-[-29%] xl:bottom-[10%]"
+        <Spline className="absolute xl:right-[-29%] xl:bottom-[10%] right-0  top-[-20%] lg:top-0"
         scene="https://prod.spline.design/ZCx2n0MnHKi5rCKm/scene.splinecode" />
  
 
