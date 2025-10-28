@@ -233,7 +233,7 @@ const AboutSection = () => {
         {/* Right Image Section */}
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="/images/pic1.jpg"
+            src="/images/face1.jpg"
             alt="Rishita Raj"
             className="h-[18rem] md:h-[26rem] lg:h-[28rem] object-contain rounded-2xl mix-blend-lighten shadow-lg"
           />
